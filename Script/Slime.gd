@@ -2,6 +2,7 @@ extends Node2D
 
 const SPEED = 60
 var direction = 1
+var health = 1
 
 @onready var ray_cast_right = $RayCastright
 @onready var ray_cast_left = $RayCastleft
@@ -17,3 +18,16 @@ func _process(delta):
 		animatedsprite.flip_h = false
 	
 	position.x += direction * SPEED * delta
+# Fungsi ini akan berjalan saat ada objek (body) masuk ke Area2D slime
+
+
+func _on_area_2d_body_entered(body):
+	# Cek apakah objek yang menyentuh slime adalah pemain
+	# Kita asumsikan pemain memiliki variabel 'health'
+	if body.name == "Player" or body.has_method("die") or "health" in body:
+		body.health -= 10
+		print("-10") # Mencetak angka 10 (atau -10) ke konsol
+		
+		# Jika kamu ingin memastikan fungsi die() dipanggil saat darah 0
+		if body.health <= 0 and body.has_method("die"):
+			body.die()
