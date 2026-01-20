@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://dityp0nryhk31"]
+
+[ext_resource type="Texture2D" uid="uid://rdrt4y4ric3q" path="res://Asset/sprites/golem biru/Golem_1_idle.png" id="1_g5leg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmilb"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(0, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd0sw"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(90, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apx0p"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(180, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tugtq"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(270, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgt1k"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(360, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu63y"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(450, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt3hv"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(540, 0, 90, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcinv"]
+atlas = ExtResource("1_g5leg")
+region = Rect2(630, 0, 90, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00knd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmilb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd0sw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apx0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tugtq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgt1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu63y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt3hv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcinv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="golem" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_00knd")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Attacking" type="Area2D" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Attacking"]

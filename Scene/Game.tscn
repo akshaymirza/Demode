@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddsgtfaff1vs6"]
+[gd_scene load_steps=10 format=3 uid="uid://ddsgtfaff1vs6"]
 
 [ext_resource type="PackedScene" uid="uid://th2851o63ajl" path="res://Scene/Player.tscn" id="1_6igcf"]
 [ext_resource type="PackedScene" uid="uid://xih08kv0701h" path="res://Scene/Slime.tscn" id="2_u6khg"]
 [ext_resource type="Texture2D" uid="uid://c1c0demmxefdb" path="res://Asset/sprites/world_tileset.png" id="3_ou18a"]
 [ext_resource type="PackedScene" uid="uid://dgow17u48n42o" path="res://Scene/killzone.tscn" id="4_mopgc"]
 [ext_resource type="Script" uid="uid://g3ectaidpkjd" path="res://Script/camera_2d.gd" id="5_ivtx6"]
+[ext_resource type="PackedScene" uid="uid://dityp0nryhk31" path="res://Scene/golem.tscn" id="6_3xgnh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mopgc"]
 texture = ExtResource("3_ou18a")
@@ -173,3 +174,6 @@ limit_bottom = 100
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 script = ExtResource("5_ivtx6")
+
+[node name="golem" parent="." instance=ExtResource("6_3xgnh")]
+position = Vector2(114, 1)
