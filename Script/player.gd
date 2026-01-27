@@ -1,59 +1,113 @@
 extends CharacterBody2D
 
+# --- VARIABEL ---
 const SPEED = 180.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -250.0
 var health = 100
 var is_dead = false
 
+# State Attack
+var is_attacking = false
+
+# Dash
+const DASH_SPEED = 600
+const DASH_CD = 0.5
+const DASH_DURATION = 0.2
+var is_dashing = false
+var can_dash = true
+
+# Double Jump
+var countjump = 0
+var maxjump = 2
+
 @onready var animatedsprite = $AnimatedSprite2D
 
+# --- FUNGSI SERANG ---
+func perform_attack(anim_name: String):
+	is_attacking = true
+	animatedsprite.play(anim_name)
+	
+	# Menunggu animasi selesai
+	await animatedsprite.animation_finished
+	is_attacking = false
+
+# --- FUNGSI DASH ---
+func start_dash():
+	is_dashing = true
+	can_dash = false
+	var dash_direction = -1 if animatedsprite.flip_h else 1
+	velocity.x = dash_direction * DASH_SPEED
+	velocity.y = 0 
+	await get_tree().create_timer(DASH_DURATION).timeout
+	is_dashing = false
+	await get_tree().create_timer(DASH_CD).timeout
+	can_dash = true
+
+# --- LOGIKA UTAMA ---
 func _physics_process(delta: float) -> void:
-	# 1. Tambahkan gravitasi
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		countjump = 0
 		
-	# 2. Jika mati, hanya jalankan gravitasi dan hentikan input
 	if is_dead:
 		move_and_slide()
 		return 
 
-	# 3. Handle loncat
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	# 1. Logika Input Serang
+	if not is_dashing:
+		if Input.is_action_just_pressed("attack") and not is_attacking:
+			perform_attack("Melee")
+		if Input.is_action_just_pressed("skill") and not is_attacking:
+			perform_attack("Range")
 
-	# 4. Handle gerakan horizontal
+	# 2. Logika Dash (Tetap mengunci pergerakan manual)
+	if Input.is_action_just_pressed("dash") and can_dash and not is_attacking:
+		start_dash()
+
+	if is_dashing:
+		move_and_slide()
+		return
+		
+	# 3. Logika Lompat (Bisa lompat meski sedang attack)
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor() or countjump < maxjump:
+			velocity.y = JUMP_VELOCITY
+			countjump += 1
+			# Hanya play animasi jump jika tidak sedang attack
+			if not is_attacking:
+				animatedsprite.play("Jump")
+
+	# 4. Handle gerakan horizontal (KINI AKTIF MESKI SEDANG ATTACK)
 	var direction := Input.get_axis("move_left", "move_right")
 	
-	# Flip sprite
-	if direction > 0:
-		animatedsprite.flip_h = false
-	elif direction < 0:
-		animatedsprite.flip_h = true
+	if direction != 0:
+		# Balik arah sprite (Hanya jika tidak sedang attack agar arah hadap tidak aneh saat menyerang)
+		# Atau hapus 'and not is_attacking' jika ingin bisa balik badan saat nyerang
+		if not is_attacking:
+			animatedsprite.flip_h = (direction < 0)
 		
-	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	# 5. Handle Animasi Dasar
+	# Logika: Mainkan animasi gerak/idle HANYA jika is_attacking bernilai FALSE
+	if not is_attacking:
+		if not is_on_floor():
+			animatedsprite.play("Jump")
+		elif direction != 0:
+			animatedsprite.play("Walk")
+		else:
+			animatedsprite.play("Idle")
+		
 	move_and_slide()
 	
-	# Contoh cara memanggil fungsi mati (untuk testing)
 	if health <= 0:
 		die()
 
-# FUNGSI DIE HARUS DI LUAR _PHYSICS_PROCESS
 func die():
-	if is_dead: 
-		return # Jika sudah mati, jangan jalankan kode di bawah berkali-kali
-	
+	if is_dead: return 
 	is_dead = true
-	print("Karakter mati!")
-	
-	# MATIKAN TABRAKAN: Agar karakter jatuh menembus lantai
 	set_collision_mask_value(1, false)
-	
-	# Beri efek lompat sedikit saat mati
-	velocity.y = JUMP_VELOCITY * 0.5 
-	
-	# Jalankan animasi mati jika ada
-	# animatedsprite.play("death")
+	velocity.y = JUMP_VELOCITY * 0.5
