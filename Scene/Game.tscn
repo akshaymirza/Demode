@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 [gd_scene format=3 uid="uid://ddsgtfaff1vs6"]
+=======
+[gd_scene load_steps=10 format=3 uid="uid://ddsgtfaff1vs6"]
+>>>>>>> a8724a63ad2393e70d6445f2a3a4d4fbbad9af3b
 
 [ext_resource type="PackedScene" uid="uid://th2851o63ajl" path="res://Scene/Player.tscn" id="1_6igcf"]
 [ext_resource type="PackedScene" uid="uid://xih08kv0701h" path="res://Scene/Slime.tscn" id="2_u6khg"]
 [ext_resource type="Texture2D" uid="uid://c1c0demmxefdb" path="res://Asset/sprites/world_tileset.png" id="3_ou18a"]
 [ext_resource type="PackedScene" uid="uid://dgow17u48n42o" path="res://Scene/killzone.tscn" id="4_mopgc"]
 [ext_resource type="Script" uid="uid://g3ectaidpkjd" path="res://Script/camera_2d.gd" id="5_ivtx6"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://b3r8snj08fv60" path="res://Asset/Tilemaps/Pixel Art Tiles and Backgrounds - Woods/Decorations/BUSH FOREGROUND 1-1.png" id="6_3xgnh"]
 [ext_resource type="Script" uid="uid://dl3g6csh6cdd0" path="res://Scene/bush_foreground_11.gd" id="6_48ymf"]
 [ext_resource type="Texture2D" uid="uid://dax6wpk0qxou1" path="res://Texture/ChatGPT_Image_3_Jun_2026__16.00.41-removebg-preview (1).png" id="8_cohtu"]
+=======
+[ext_resource type="PackedScene" uid="uid://dityp0nryhk31" path="res://Scene/golem.tscn" id="6_3xgnh"]
+>>>>>>> a8724a63ad2393e70d6445f2a3a4d4fbbad9af3b
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mopgc"]
 texture = ExtResource("3_ou18a")
@@ -87,6 +95,7 @@ texture = ExtResource("3_ou18a")
 0:7/0 = 0
 1:7/0 = 0
 3:7/0 = 0
+3:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:7/0 = 0
 6:7/0 = 0
 7:7/0 = 0
@@ -95,6 +104,7 @@ texture = ExtResource("3_ou18a")
 1:8/0 = 0
 2:8/0 = 0
 3:8/0 = 0
+3:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:8/0 = 0
 5:8/0 = 0
 6:8/0 = 0
@@ -104,7 +114,9 @@ texture = ExtResource("3_ou18a")
 1:9/0 = 0
 2:9/0 = 0
 3:9/0 = 0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:9/0 = 0
+4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:9/0 = 0
 6:9/0 = 0
 7:9/0 = 0
@@ -113,6 +125,7 @@ texture = ExtResource("3_ou18a")
 2:10/0 = 0
 3:10/0 = 0
 4:10/0 = 0
+4:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:10/0 = 0
 0:11/0 = 0
 1:11/0 = 0
@@ -180,6 +193,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 script = ExtResource("5_ivtx6")
 
+<<<<<<< HEAD
 [node name="BushForeground11" type="Area2D" parent="." unique_id=389510361]
 position = Vector2(131, -15)
 script = ExtResource("6_48ymf")
@@ -197,3 +211,7 @@ texture_filter = 1
 position = Vector2(-5.999998, -20.500004)
 scale = Vector2(0.049853522, 0.046093747)
 texture = ExtResource("8_cohtu")
+=======
+[node name="golem" parent="." instance=ExtResource("6_3xgnh")]
+position = Vector2(10, 1)
+>>>>>>> a8724a63ad2393e70d6445f2a3a4d4fbbad9af3b
