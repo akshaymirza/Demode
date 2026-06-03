@@ -7,6 +7,13 @@ var is_dead = false
 
 @onready var animatedsprite = $AnimatedSprite2D
 
+# --- INI TAMBAHAN BARU ---
+func _ready() -> void:
+	# Memasukkan Player ke dalam group bernama "player" 
+	# Biar script semak (BushPortal.gd) bisa ngenalin kamu pas disentuh!
+	add_to_group("player")
+# -------------------------
+
 func _physics_process(delta: float) -> void:
 	# 1. Tambahkan gravitasi
 	if not is_on_floor():

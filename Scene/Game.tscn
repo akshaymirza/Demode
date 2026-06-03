@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddsgtfaff1vs6"]
+[gd_scene format=3 uid="uid://ddsgtfaff1vs6"]
 
 [ext_resource type="PackedScene" uid="uid://th2851o63ajl" path="res://Scene/Player.tscn" id="1_6igcf"]
 [ext_resource type="PackedScene" uid="uid://xih08kv0701h" path="res://Scene/Slime.tscn" id="2_u6khg"]
 [ext_resource type="Texture2D" uid="uid://c1c0demmxefdb" path="res://Asset/sprites/world_tileset.png" id="3_ou18a"]
 [ext_resource type="PackedScene" uid="uid://dgow17u48n42o" path="res://Scene/killzone.tscn" id="4_mopgc"]
 [ext_resource type="Script" uid="uid://g3ectaidpkjd" path="res://Script/camera_2d.gd" id="5_ivtx6"]
+[ext_resource type="Texture2D" uid="uid://b3r8snj08fv60" path="res://Asset/Tilemaps/Pixel Art Tiles and Backgrounds - Woods/Decorations/BUSH FOREGROUND 1-1.png" id="6_3xgnh"]
+[ext_resource type="Script" uid="uid://dl3g6csh6cdd0" path="res://Scene/bush_foreground_11.gd" id="6_48ymf"]
+[ext_resource type="Texture2D" uid="uid://dax6wpk0qxou1" path="res://Texture/ChatGPT_Image_3_Jun_2026__16.00.41-removebg-preview (1).png" id="8_cohtu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mopgc"]
 texture = ExtResource("3_ou18a")
@@ -145,27 +148,30 @@ sources/0 = SubResource("TileSetAtlasSource_mopgc")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ivtx6"]
 distance = -228.0
 
-[node name="level 1" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48ymf"]
+size = Vector2(90, 22)
 
-[node name="slime" parent="." instance=ExtResource("2_u6khg")]
+[node name="level 1" type="Node2D" unique_id=2064825700]
+
+[node name="slime" parent="." unique_id=1515667532 instance=ExtResource("2_u6khg")]
 position = Vector2(53, -3)
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." unique_id=1796150067]
 tile_set = SubResource("TileSet_ivtx6")
 format = 2
 layer_0/tile_data = PackedInt32Array(65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, -65525, 0, 0, -4, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, -10, 0, 0)
 
-[node name="killzone" parent="." instance=ExtResource("4_mopgc")]
+[node name="killzone" parent="." unique_id=1951854270 instance=ExtResource("4_mopgc")]
 position = Vector2(-61, -42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=541905718]
 position = Vector2(7, 42)
 shape = SubResource("WorldBoundaryShape2D_ivtx6")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_6igcf")]
+[node name="CharacterBody2D" parent="." unique_id=2059701644 instance=ExtResource("1_6igcf")]
 position = Vector2(-63, -45)
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=945749120]
 position = Vector2(2, -8)
 zoom = Vector2(4, 4)
 limit_enabled = false
@@ -173,3 +179,21 @@ limit_bottom = 100
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 script = ExtResource("5_ivtx6")
+
+[node name="BushForeground11" type="Area2D" parent="." unique_id=389510361]
+position = Vector2(131, -15)
+script = ExtResource("6_48ymf")
+
+[node name="Sprite2D" type="Sprite2D" parent="BushForeground11" unique_id=1014789575]
+z_index = -1
+texture = ExtResource("6_3xgnh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BushForeground11" unique_id=484904233]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_48ymf")
+
+[node name="IconE" type="Sprite2D" parent="BushForeground11" unique_id=1501908033]
+texture_filter = 1
+position = Vector2(-5.999998, -20.500004)
+scale = Vector2(0.049853522, 0.046093747)
+texture = ExtResource("8_cohtu")
